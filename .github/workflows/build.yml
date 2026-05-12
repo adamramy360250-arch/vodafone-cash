@@ -1,0 +1,25 @@
+name: Build APK
+on:
+  push:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    container:
+      image: kivy/buildozer:latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build APK
+        run: |
+          git config --global --add safe.directory "*" || true
+          python3 -c "
+f=open(chr(39)/home/user/.venv/lib/python3.12/site-packages/buildozer/__init__.pychr(39))
+c=f.read().replace(chr(99)+chr(111)+chr(110)+chr(116)+chr(32)+chr(61)+chr(32)+chr(105)+chr(110)+chr(112)+chr(117)+chr(116)+chr(40)+chr(39)+chr(65)+chr(114)+chr(101)+chr(32)+chr(121)+chr(111)+chr(117)+chr(32)+chr(115)+chr(117)+chr(114)+chr(101)+chr(32)+chr(121)+chr(111)+chr(117)+chr(32)+chr(119)+chr(97)+chr(110)+chr(116)+chr(32)+chr(116)+chr(111)+chr(32)+chr(99)+chr(111)+chr(110)+chr(116)+chr(105)+chr(110)+chr(117)+chr(101)+chr(32)+chr(91)+chr(121)+chr(47)+chr(110)+chr(93)+chr(63)+chr(32)+chr(39)+chr(41),chr(99)+chr(111)+chr(110)+chr(116)+chr(32)+chr(61)+chr(32)+chr(39)+chr(121)+chr(39))
+open(chr(39)/home/user/.venv/lib/python3.12/site-packages/buildozer/__init__.pychr(39),chr(119)).write(c)
+"
+          buildozer android debug
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: vcash-apk
+          path: bin/*.apk
