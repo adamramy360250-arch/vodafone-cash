@@ -14,6 +14,12 @@ from storage import save,load,clear
 from firebase import check_code,use_code,add_code,gen_code,log_op,get_logs
 
 Window.clearcolor=(0.05,0.03,0,1)
+from kivy.core.text import LabelBase
+try:
+    LabelBase.register(name="Arabic", fn_regular="Cairo.ttf")
+    FONT = "Arabic"
+except:
+    FONT = "Roboto"
 G=(1,0.85,0.2,1)
 D=(0.8,0.53,0,1)
 R=(0.8,0.1,0.1,1)
@@ -23,13 +29,13 @@ def btn(text,color=None,h=50):
     b=Button(text=text,font_size=16,size_hint_y=None,height=h,background_color=color or D,background_normal="",bold=True)
     return b
 
-def lbl(text,size=15,color=None,h=35):
-    l=Label(text=text,font_size=size,size_hint_y=None,height=h,color=color or G,halign="center",valign="middle")
+def lbl(text,size=15,color=None,h=35,font=None):
+    l=Label(text=text,font_size=size,size_hint_y=None,height=h,color=color or G,halign="center",valign="middle",font_name=font or FONT)
     l.bind(size=l.setter("text_size"))
     return l
 
-def inp(hint,pw=False,h=45):
-    return TextInput(hint_text=hint,font_size=15,size_hint_y=None,height=h,multiline=False,password=pw,background_color=(0.1,0.06,0,1),foreground_color=G,hint_text_color=(0.5,0.4,0,1),cursor_color=G,padding=[10,10])
+def inp(hint,pw=False,h=45,font=None):
+    return TextInput(hint_text=hint,font_size=15,size_hint_y=None,height=h,multiline=False,password=pw,background_color=(0.1,0.06,0,1),foreground_color=G,hint_text_color=(0.5,0.4,0,1),cursor_color=G,padding=[10,10],font_name=font or FONT)
 
 class SplashScreen(Screen):
     def __init__(self,**kw):
