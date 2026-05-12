@@ -12,11 +12,7 @@ jobs:
       - name: Build APK
         run: |
           git config --global --add safe.directory "*" || true
-          python3 -c "open('/home/user/.venv/lib/python3.12/site-packages/buildozer/__init__.py').read()" 2>/dev/null && python3 -c "
-content = open('/home/user/.venv/lib/python3.12/site-packages/buildozer/__init__.py').read()
-content = content.replace("cont = input('Are you sure you want to continue [y/n]? ')", "cont = 'y'")
-open('/home/user/.venv/lib/python3.12/site-packages/buildozer/__init__.py', 'w').write(content)
-" || true
+          sed -i "s/cont = input(.*/cont = 'y'/" /home/user/.venv/lib/python3.12/site-packages/buildozer/__init__.py || true
           buildozer android debug
       - name: Upload APK
         uses: actions/upload-artifact@v4
