@@ -12,7 +12,7 @@ jobs:
       - name: Build APK
         run: |
           git config --global --add safe.directory "*" || true
-          sed -i "s/cont = input(.*/cont = 'y'/" /home/user/.venv/lib/python3.12/site-packages/buildozer/__init__.py || true
+          find /home/user/.venv/lib -name "__init__.py" -path "*/buildozer/*" -exec sed -i "s/cont = input(.*/cont = chr(121)/" {} \; || true
           buildozer android debug
       - name: Upload APK
         uses: actions/upload-artifact@v4
