@@ -123,9 +123,13 @@ class ActivateScreen(Screen):
                 path = os.path.expanduser("~/.vcash.json")
                 d = {}
                 if os.path.exists(path):
-                    d = json.load(open(path))
+                    try: d = json.load(open(path))
+                    except: d = {}
                 d["activated"] = True
                 d["is_admin"] = (t == "admin")
+                if "seamless" not in d: d["seamless"] = ""
+                if "token" not in d: d["token"] = ""
+                if "msisdn" not in d: d["msisdn"] = ""
                 open(path, "w").write(json.dumps(d))
                 nxt = "admin" if t == "admin" else "login"
                 Clock.schedule_once(lambda dt: setattr(self.manager, "current", nxt), 0)
