@@ -13,7 +13,7 @@ android.api = 33
 android.minapi = 21
 android.ndk = 25b
 android.accept_sdk_license = True
-android.icon = icon.jpg
+android.icon = icon.png
 
 [buildozer]
 log_level = 2
