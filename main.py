@@ -52,14 +52,6 @@ def ginp(hint, pw=False, h=45):
 class SplashScreen(Screen):
     def __init__(self, **kw):
         super().__init__(**kw)
-        with self.canvas.before:
-            Color(0.04, 0.02, 0, 1)
-            self._bg = Rectangle(pos=self.pos, size=self.size)
-            Color(0.8, 0.53, 0, 0.05)
-            self._bg2 = Rectangle(pos=self.pos, size=self.size)
-        self.bind(size=lambda w,v: [setattr(w._bg,"size",v), setattr(w._bg2,"size",v)])
-        self.bind(pos=lambda w,v: [setattr(w._bg,"pos",v), setattr(w._bg2,"pos",v)])
-
         main = BoxLayout(orientation="vertical", padding=[30,60,30,40], spacing=18)
 
         # Header box
