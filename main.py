@@ -56,7 +56,7 @@ class SplashScreen(Screen):
 
         # Header box
         header = BoxLayout(orientation="vertical", size_hint_y=None, height=140, padding=[15,10])
-        gold_card(header)
+        # gold_card removed
         header.add_widget(glbl("月よの川の川ソ", 22, GOLD, 45))
         header.add_widget(glbl("VF Cash Pro", 16, DARK_GOLD, 30))
         header.add_widget(glbl("Developer", 12, (0.6,0.5,0.2,1), 25))
@@ -237,7 +237,7 @@ class HomeScreen(Screen):
 
         # number badge
         num_box = BoxLayout(size_hint_y=None, height=40, padding=[10,5])
-        gold_card(num_box)
+        # gold_card removed
         self.ml = glbl("", 13, DARK_GOLD, 30)
         num_box.add_widget(self.ml)
         l.add_widget(num_box)
