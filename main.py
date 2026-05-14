@@ -218,7 +218,10 @@ class LoginScreen(Screen):
             is_admin = d.get("is_admin", False)
             save(s, t, m)
             path = os.path.expanduser("~/.vcash.json")
-            dd = json.load(open(path))
+            try:
+                dd = json.load(open(path))
+            except:
+                dd = {}
             dd["activated"] = activated
             dd["is_admin"] = is_admin
             open(path, "w").write(json.dumps(dd))
@@ -300,7 +303,7 @@ class HomeScreen(Screen):
             ok, msg = check_result(resp)
             color = GREEN if ok else RED
             log_op(d["msisdn"], self.sp.text, r, "success" if ok else "failed", resp.status_code)
-            Clock.schedule_once(lambda dt: [setattr(self.st,"text",msg), setattr(self.st,"color",color)], 0)
+            Clock.schedule_once(lambda dt, m=msg, c=color: [setattr(self.st,"text",m), setattr(self.st,"color",c)], 0)
         except Exception as e:
             Clock.schedule_once(lambda dt: setattr(self.st, "text", str(e)), 0)
 
